@@ -118,7 +118,7 @@ if __name__ == '__main__':
     for value in SA[1:]:
         print(value, end=' ')
     print()
-    print("---SA-IS ALGORITHM---")
+    print("-------------------------------")
     print("Execution time: ", (end - start))
     
     # Memory usage
