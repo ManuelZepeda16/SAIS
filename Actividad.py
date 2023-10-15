@@ -1,5 +1,3 @@
-import sys
-
 def getBuckets(T):
     count = {}
     buckets = {}
@@ -58,7 +56,7 @@ def sais(T):
     prev = None
     for i in range(len(SA)):
         if t[SA[i]] == "S" and t[SA[i] - 1] == "L":
-            if prev is not None and T[SA[prev]:LMS.get(SA[prev], 0)] != T[SA[i]:LMS.get(SA[i], 0)]:
+            if prev is not None and T[SA[prev]:LMS[SA[prev]]] != T[SA[i]:LMS[SA[i]]]:
                 name += 1
             prev = i
             namesp[SA[i]] = name
@@ -101,24 +99,7 @@ def sais(T):
 
     return SA
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <input_file>")
-        return
-
-    input_file = sys.argv[1]
-    try:
-        with open(input_file, 'r', encoding='utf-8') as file:
-            # Read the file line by line
-            T = []
-            for line in file:
-                T.extend(ord(c) for c in line)
-
-            SA = sais(T)
-            print(SA)
-    except FileNotFoundError:
-        print(f"File not found: {input_file}")
-        return
-
-if __name__ == "__main__":
-    main()
+string = "GTCCCGATGTCATGTCAGGA$"
+T = [ord(c) for c in string]
+SA = sais(T)
+print(SA)
