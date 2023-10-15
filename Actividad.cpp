@@ -4,8 +4,11 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
+#include <chrono>
 
 using namespace std;
+typedef chrono::milliseconds MSEC;
+typedef chrono::high_resolution_clock HRC;
 
 
 map<int, pair<int, int>> getBuckets(vector<int> T) {
@@ -247,6 +250,9 @@ vector<int> sais(vector<int> T) {
 
 
 int main(int num, char* args[]) {
+
+    auto start = HRC::now();
+
     if (num != 2) {
         std::cout << "<Binary> <text>" << std::endl;
         return 1;
@@ -277,6 +283,11 @@ int main(int num, char* args[]) {
     }
 
     cout << endl;
+
+    auto end = HRC::now();
+    auto exec_time = chrono::duration_cast<MSEC>(end-start);
+
+    cout<< "Execution time: " << exec_time.count() << "msec" << endl;
 
   return 0;
 }

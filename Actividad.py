@@ -108,7 +108,7 @@ def openFile(filename):
     return f.read()
 
 if __name__ == '__main__':
-    string = openFile("pinocchio.txt")
+    string = openFile("odyssey.txt")
     T = [ord(c) for c in string]
     T.append(0)
     start = time.time()
