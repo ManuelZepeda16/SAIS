@@ -108,7 +108,7 @@ def openFile(filename):
     return f.read()
 
 if __name__ == '__main__':
-    string = openFile("odyssey.txt")
+    string = openFile("hamlet.txt")
     T = [ord(c) for c in string]
     T.append(0)
     start = time.time()
@@ -119,7 +119,7 @@ if __name__ == '__main__':
         print(value, end=' ')
     print()
     print("-------------------------------")
-    print("Execution time: ", (end - start))
+    print("Execution time: ", (end - start) * 1000)
     
     # Memory usage
     memoryUsage = memory_usage((sais, (T, )), interval=0.01)
