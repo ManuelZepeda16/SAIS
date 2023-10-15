@@ -6,6 +6,8 @@
 #include <string>
 #include <chrono>
 
+
+//Libraries for measuring execution time
 using namespace std;
 typedef chrono::milliseconds MSEC;
 typedef chrono::high_resolution_clock HRC;
@@ -287,7 +289,8 @@ int main(int num, char* args[]) {
     auto end = HRC::now();
     auto exec_time = chrono::duration_cast<MSEC>(end-start);
 
-    cout<< "Execution time: " << exec_time.count() << "msec" << endl;
+    //Print execution time in milliseconds
+    cout<< "\nExecution time: " << exec_time.count() << "msec\n\n";
 
   return 0;
 }
