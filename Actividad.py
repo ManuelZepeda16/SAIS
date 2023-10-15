@@ -58,7 +58,7 @@ def sais(T):
     prev = None
     for i in range(len(SA)):
         if t[SA[i]] == "S" and t[SA[i] - 1] == "L":
-            if prev is not None and T[SA[prev]:LMS[SA[prev]]] != T[SA[i]:LMS[SA[i]]]:
+            if prev is not None and T[SA[prev]:LMS.get(SA[prev], 0)] != T[SA[i]:LMS.get(SA[i], 0)]:
                 name += 1
             prev = i
             namesp[SA[i]] = name
@@ -101,7 +101,6 @@ def sais(T):
 
     return SA
 
-
 def main():
     if len(sys.argv) != 2:
         print("Usage: python script.py <input_file>")
@@ -109,15 +108,17 @@ def main():
 
     input_file = sys.argv[1]
     try:
-        with open(input_file, 'r') as file:
-            file_content = file.read()
+        with open(input_file, 'r', encoding='utf-8') as file:
+            # Read the file line by line
+            T = []
+            for line in file:
+                T.extend(ord(c) for c in line)
+
+            SA = sais(T)
+            print(SA)
     except FileNotFoundError:
         print(f"File not found: {input_file}")
         return
-
-    T = [ord(c) for c in file_content]
-    SA = sais(T)
-    print(SA)
 
 if __name__ == "__main__":
     main()
