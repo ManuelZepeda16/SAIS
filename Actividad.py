@@ -108,7 +108,7 @@ def openFile(filename):
     return f.read()
 
 if __name__ == '__main__':
-    string = openFile("pinocchio.txt")
+    string = openFile("odyssey.txt")
     T = [ord(c) for c in string]
     T.append(0)
     start = time.time()
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     for value in SA[1:]:
         print(value, end=' ')
     print()
-    print("---SA-IS ALGORITHM---")
+    print("-------------------------------")
     print("Execution time: ", (end - start))
     
     # Memory usage
