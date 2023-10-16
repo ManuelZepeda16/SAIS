@@ -250,6 +250,28 @@ vector<int> sais(vector<int> T) {
     return SA; //the constructed Suffix Array SA is returned
 }
 
+//Search position of a string
+int search(const string& text, const string& pattern, const vector<int>& SA) {
+    int left = 0;
+    int right = text.length() - 1;
+    int first_occurrence = -1;
+
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        string suffix = text.substr(SA[mid]);
+        if (suffix.compare(0, pattern.length(), pattern) == 0) {
+            first_occurrence = mid;
+            right = mid - 1;  // Continuar buscando a la izquierda
+        } else if (pattern < suffix) {
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    return first_occurrence;
+}
+
 
 int main(int num, char* args[]) {
 
@@ -292,5 +314,9 @@ int main(int num, char* args[]) {
     //Print execution time in milliseconds
     cout<< "\nExecution time: " << exec_time.count() << "msec\n\n";
 
+    //Print position of the string to find
+    std::string findString = "DraculaThisebookisfortheuseofanyoneanywhere";
+    cout << "The string " << "'" <<findString << "'" << "is on position " << search(text, findString, SA) <<"\n";
+    
   return 0;
 }
