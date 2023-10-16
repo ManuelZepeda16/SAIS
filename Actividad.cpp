@@ -252,39 +252,25 @@ vector<int> sais(vector<int> T) {
 
 //Search position of a string
 int search(const string& text, const string& pattern, const vector<int>& SA) {
-    // Initialize left and right pointers for binary search.
     int left = 0;
     int right = text.length() - 1;
-
-    // Initialize the variable to store the index of the first occurrence of the pattern.
     int first_occurrence = -1;
 
-    // Perform a binary search to find the pattern within the text.
     while (left <= right) {
-        // Calculate the middle index for the binary search.
         int mid = (left + right) / 2;
-
-        // Extract a suffix of the text starting from the SA[mid] position.
         string suffix = text.substr(SA[mid]);
-
-        // Compare the extracted suffix with the pattern.
         if (suffix.compare(0, pattern.length(), pattern) == 0) {
-            // If the pattern matches the suffix, update first_occurrence and continue searching to the left.
             first_occurrence = mid;
-            right = mid - 1;  // Continue with left searching
+            right = mid - 1;  
         } else if (pattern < suffix) {
-            // If the pattern is lexicographically less than the suffix, adjust the right pointer.
             right = mid - 1;
         } else {
-            // If the pattern is lexicographically greater than the suffix, adjust the left pointer.
             left = mid + 1;
         }
     }
 
-    // Return the index of the first occurrence of the pattern (or -1 if not found).
     return first_occurrence;
 }
-
 
 
 int main(int num, char* args[]) {
@@ -305,8 +291,17 @@ int main(int num, char* args[]) {
 
     std::string text;
     std::string line;
-    while (std::getline(file, line)) {
-        text += line;
+
+    //Read and format .txt file
+   while (getline(file, line)) { 
+        for (int i = 0; i < line.length(); i++) { //Traverse the book array
+        char c = line.at(i);         
+    
+        // Check if it is an alphabetical character
+        if (( ( c >= 'a' && c <= 'z' ) || ( c >= 'A' && c <= 'Z' ) ) ) {
+            text += c;
+            }
+        }
     }
     file.close();
 
@@ -329,7 +324,7 @@ int main(int num, char* args[]) {
     cout<< "\nExecution time: " << exec_time.count() << "msec\n\n";
 
     //Print position of the string to find
-    std::string findString = "DraculaThisebookisfortheuseofanyoneanywhere";
+    std::string findString = "inpassagesborrowedfrom";
     cout << "The string " << "'" <<findString << "'" << "is on position " << search(text, findString, SA) <<"\n";
     
   return 0;

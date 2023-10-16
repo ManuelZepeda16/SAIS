@@ -1,7 +1,8 @@
 import time
 import numpy as np
 from memory_profiler import memory_usage
-import pylab as pl
+import matplotlib.pylab as pl
+
 
 # Function to calculate buckets for the input string
 def getBuckets(T):
@@ -102,21 +103,27 @@ def sais(T):
 
     return SA
 
-# Function to open and read a file
-def openFile(filename):
-    f = open(filename, encoding="utf8")
-    return f.read()
+#Function to format .txt file
+def clearCharacters(input_file):
+    with open(input_file, 'r', encoding='ascii', errors='ignore') as input_file:
+        content = input_file.read()
+
+    #Remove non alphabetical characters
+    clean_content = ''.join(character for character in content if character.isalpha())
+
+    return clean_content
+
+
 
 if __name__ == '__main__':
-    string = openFile("hamlet.txt")
+    string = clearCharacters("test.txt")
     T = [ord(c) for c in string]
     T.append(0)
     start = time.time()
     SA = sais(T)  # Start measuring execution time
     end = time.time()
     #print(SA)  # Stop measuring execution time
-    for value in SA[1:]:
-        print(value, end=' ')
+    print(SA)
     print()
     print("-------------------------------")
     print("Execution time: ", (end - start) * 1000)
