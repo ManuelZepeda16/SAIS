@@ -275,6 +275,7 @@ int search(const string& text, const string& pattern, const vector<int>& SA) {
     return first_occurrence; //contains the index of the first occurrence of the pattern in the suffix array, or -1 if no occurrence is found.
 }
 
+// Find a string in a vector
 vector<int> allOccurrences(const string& text, const string& pattern, const vector<int>& SA) {
     int firstOccurrence = search(text, pattern, SA);
     if (firstOccurrence == -1) {
@@ -352,6 +353,10 @@ int main(int num, char* args[]) {
         cout << "Occurrence " << i + 1 << " at Position: " << occurrences[i] << endl;
     }
 
+    //Memory usage
+    struct rusage r_usage;
+    getrusage(RUSAGE_SELF, &r_usage);
+    printf("Memoria utilizada: %ld KB\n", r_usage.ru_maxrss);
     
   return 0;
 }

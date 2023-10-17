@@ -116,7 +116,7 @@ def clearCharacters(input_file):
 
 
 if __name__ == '__main__':
-    string = clearCharacters("GreatGatsby.txt")
+    string = clearCharacters("TheMasqueoftheRedDeath.txt")
     T = [ord(c) for c in string]
     T.append(0)
     start = time.time()
