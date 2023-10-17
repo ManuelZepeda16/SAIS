@@ -116,7 +116,7 @@ def clearCharacters(input_file):
 
 
 if __name__ == '__main__':
-    string = clearCharacters("test.txt")
+    string = clearCharacters("GreatGatsby.txt")
     T = [ord(c) for c in string]
     T.append(0)
     start = time.time()
@@ -126,7 +126,7 @@ if __name__ == '__main__':
     print(SA)
     print()
     print("-------------------------------")
-    print("Execution time: ", (end - start) * 1000)
+    print(f"Execution time: {(end - start) * 1000} msec")
     
     # Memory usage
     memoryUsage = memory_usage((sais, (T, )), interval=0.01)

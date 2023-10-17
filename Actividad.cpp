@@ -321,7 +321,7 @@ int main(int num, char* args[]) {
     auto exec_time = chrono::duration_cast<MSEC>(end-start);
 
     //Print execution time in milliseconds
-    cout<< "\nExecution time: " << exec_time.count() << "msec\n\n";
+    cout<< "\nExecution time: " << exec_time.count() << " msec\n\n";
 
     //Print position of the string to find
     std::string findString = "inpassagesborrowedfrom";
