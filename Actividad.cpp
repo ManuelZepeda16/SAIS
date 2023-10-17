@@ -256,22 +256,39 @@ int search(const string& text, const string& pattern, const vector<int>& SA) {
     int right = text.length() - 1;
     int first_occurrence = -1;
 
-    while (left <= right) {
+    //The loop continues until it finds the first occurrence of the pattern or exhausts the search space
+    while (left <= right) { // continues as long as the left boundary is less than or equal to the right boundary
+        // calculates the middle index
         int mid = (left + right) / 2;
-        string suffix = text.substr(SA[mid]);
-        if (suffix.compare(0, pattern.length(), pattern) == 0) {
+        string suffix = text.substr(SA[mid]); // extracts a suffix from the text based on the index in the suffix array 
+        if (suffix.compare(0, pattern.length(), pattern) == 0) { //compares the extracted suffix with the pattern
+        // updates first_occurrence to mid to store the current index and narrows the search range to the left side
             first_occurrence = mid;
             right = mid - 1;  
-        } else if (pattern < suffix) {
+        } else if (pattern < suffix) { //If the pattern is lexicographically less than the suffix, it updates the right boundary
             right = mid - 1;
-        } else {
+        } else { //If the pattern is lexicographically greater than the suffix, it updates the left boundary
             left = mid + 1;
         }
     }
 
-    return first_occurrence;
+    return first_occurrence; //contains the index of the first occurrence of the pattern in the suffix array, or -1 if no occurrence is found.
 }
 
+vector<int> allOccurrences(const string& text, const string& pattern, const vector<int>& SA) {
+    int firstOccurrence = search(text, pattern, SA);
+    if (firstOccurrence == -1) {
+        return vector<int>(1, -1);
+    }
+    int i = firstOccurrence;
+    vector<int> occurrences;
+    while (text.substr(SA[i]).compare(0, pattern.length(), pattern) == 0) {
+        occurrences.push_back(SA[i]);
+        i++;
+    }
+    sort(occurrences.begin(), occurrences.end());
+    return occurrences;
+}
 
 int main(int num, char* args[]) {
 
@@ -324,8 +341,17 @@ int main(int num, char* args[]) {
     cout<< "\nExecution time: " << exec_time.count() << " msec\n\n";
 
     //Print position of the string to find
-    std::string findString = "inpassagesborrowedfrom";
-    cout << "The string " << "'" <<findString << "'" << "is on position " << search(text, findString, SA) <<"\n";
+    std::string findString = "Homer";
+    vector<int> occurrences = allOccurrences(text, findString, SA);
+
+    cout << "The first string occurrence for " << "'" <<findString << "'" << " is on position " << occurrences[0] <<"\n";
+
+    cout << "Total Ocurrences: " <<occurrences.size() << endl;
+
+    for (int i = 0; i < occurrences.size(); i++) {
+        cout << "Occurrence " << i + 1 << " at Position: " << occurrences[i] << endl;
+    }
+
     
   return 0;
 }
