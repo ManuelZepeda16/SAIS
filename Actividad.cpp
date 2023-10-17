@@ -356,7 +356,7 @@ int main(int num, char* args[]) {
     //Memory usage
     struct rusage r_usage;
     getrusage(RUSAGE_SELF, &r_usage);
-    printf("Memoria utilizada: %ld KB\n", r_usage.ru_maxrss);
+    printf("\nMemory usage: %ld KB\n", r_usage.ru_maxrss);
     
   return 0;
 }
