@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <chrono>
+#include <sys/resource.h>
 
 
 //Libraries for measuring execution time
